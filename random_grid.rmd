@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-setwd("/Users/cpt_rogerz/Library/Mobile Documents/com~apple~CloudDocs/SVM")
+setwd("/SVM")
 rm(list=ls())
 cat("\014")
 
