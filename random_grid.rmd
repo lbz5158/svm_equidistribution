@@ -1,0 +1,93 @@
+---
+title: "Random Grids"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("/Users/cpt_rogerz/Library/Mobile Documents/com~apple~CloudDocs/SVM")
+rm(list=ls())
+cat("\014")
+
+N = c(20,100,500,2000)
+```
+The simulation is done in 2-D space for the purpose of visualization.
+
+
+
+# Monte Carlo Sequences
+```{r}
+png("monte_carlo.png",500,500)
+par(mfrow=c(2,2))
+for(n in N){
+  X <- runif(n)
+  Y <- runif(n)
+  plot.new()
+  points(X,Y,pch=19,cex=0.2,xlab="",ylab="")
+}
+dev.off()
+```
+
+
+
+# Sobol Sequences
+Reference is found here: https://cran.r-project.org/web/packages/SobolSequence/vignettes/sobolsequence.html
+```{r}
+library(SobolSequence)
+
+png("sobol_20.png",500,500)
+par(mfrow=c(2,2))
+s <- 2
+m <- 20 # Range 10:31
+c <- 2^m
+for(n in N){
+  mat <- sobolSequence.points(dimR=s, dimF2=m, count=n)
+  plot.new()
+  points(mat[,1],mat[,2],pch=19,cex=0.2,xlab="",ylab="")
+}
+dev.off()
+```
+
+
+
+# Weyl Sequences
+```{r}
+png("weyl.png",500,500)
+par(mfrow=c(2,2))
+for(n in N){
+  X = sqrt(2)*1:n-floor(sqrt(2)*1:n)
+  Y = sqrt(3)*1:n-floor(sqrt(3)*1:n)
+  plot.new()
+  points(X,Y,pch=19,cex=0.2,xlab="",ylab="")
+}
+dev.off()
+```
+
+
+
+# Haber Sequences
+```{r}
+png("haber.png",500,500)
+par(mfrow=c(2,2))
+for(n in N){
+  X = sqrt(3)*1:n*(1:n+1)/2-floor(sqrt(3)*1:n*(1:n+1)/2)
+  Y = sqrt(5)*1:n*(1:n+1)/2-floor(sqrt(5)*1:n*(1:n+1)/2)
+  plot.new()
+  points(X,Y,pch=19,cex=0.2,xlab="",ylab="")
+}
+dev.off()
+```
+
+
+
+# Baker Sequences
+```{r}
+png("baker.png",500,500)
+par(mfrow=c(2,2))
+for(n in N){
+  X = exp(1/2)*1:n-floor(exp(1/2)*1:n)
+  Y = exp(1/3)*1:n-floor(exp(1/3)*1:n)
+  plot.new()
+  points(X,Y,pch=19,cex=0.2,xlab="",ylab="")
+}
+dev.off()
+```
